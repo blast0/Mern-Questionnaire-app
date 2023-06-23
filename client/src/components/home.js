@@ -16,8 +16,6 @@ const Home = () => {
     )
   }
 
-
-
   return (
     <div className='Home-page'>
       <form onSubmit={submitUserName}>

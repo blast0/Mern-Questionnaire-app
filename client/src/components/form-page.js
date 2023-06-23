@@ -14,11 +14,14 @@ const FormPage = () => {
   const [dob, setDob] = useState('')
   const [isNewUSer, setIsNewUser] = useState(false)
 
+
   useEffect(() => {
+    //Find userDetails by username 
     axios({
       method: 'get',
       url: `http://localhost:3002/users/${userName}`,
     }).then((res) => {
+      //Set the User Details in the controlled inputs state 
       setName(res.data.name)
       setEmail(res.data.email)
       setPhone(res.data.phone)
@@ -26,6 +29,7 @@ const FormPage = () => {
       setIsNewUser(false)
     })
       .catch((error) => {
+        //If not found assume new user
         setIsNewUser(true)
         console.error(error);
       });
@@ -34,6 +38,7 @@ const FormPage = () => {
 
   const submitUserName = () => {
     if (isNewUSer) {
+      //Create the user with the details entered in the input boxes
       axios.post("http://localhost:3002/users", {
         username: userName,
         name: name,
@@ -48,6 +53,7 @@ const FormPage = () => {
         });
     }
     else {
+      //Replace the user with the new details entered in the input boxes
       axios.patch("http://localhost:3002/users/" + userName, {
         username: userName,
         name: name,
@@ -62,6 +68,7 @@ const FormPage = () => {
           console.log(error);
         });
     }
+    //Move to Result Page
     navigate(
       "/result",
       {
