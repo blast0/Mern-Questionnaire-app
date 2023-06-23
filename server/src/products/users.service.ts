@@ -1,0 +1,96 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
+import { User } from './user.model';
+
+@Injectable()
+export class UsersService {
+  constructor(
+    @InjectModel('User') private readonly userModel: Model<User>,
+  ) {}
+
+  async insertUser(username: String, name: string, email: string, phone: number, dob: String) {
+    const newUser = new this.userModel({
+      username,
+      name,
+      email,
+      phone,
+      dob
+    });
+    const result = await newUser.save();
+    return result.id as string;
+  }
+
+  async getUsers() {
+    const users = await this.userModel.find().exec();
+    return users.map(user => ({
+      id: user.id,
+      username: user.username,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      dob: user.dob
+    }));
+  }
+
+  async getSingleUser(userId: string) {
+    const user = await this.findUser(userId);
+    return {
+      id: user.id,
+      username: user.username,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      dob: user.dob
+    };
+  }
+
+  async updateUser(
+    userId: string,
+    username: String,
+    name:   String,
+    email: String, 
+    phone: Number,
+    dob: String,
+  ) {
+    const updatedUser = await this.findUser(userId);
+    if(username){
+      updatedUser.username=username;
+    }
+    if (name) {
+      updatedUser.name = name;
+    }
+    if (email) {
+      updatedUser.email = email;
+    }
+    if (phone) {
+      updatedUser.phone = phone;
+    }
+    if (dob) {
+      updatedUser.dob = dob;
+    }
+
+    updatedUser.save();
+  }
+
+  async deleteUser(prodId: string) {
+    const result = await this.userModel.deleteOne({_id: prodId}).exec();
+    if (result.n === 0) {
+      throw new NotFoundException('Could not find user.');
+    }
+  }
+
+  private async findUser(userName: string): Promise<User> {
+    let user;
+    try {
+      user = await this.userModel.findOne({usename: userName});
+    } catch (error) {
+      throw new NotFoundException('Could not find user.');
+    }
+    if (!user) {
+      throw new NotFoundException('Could not find user.');
+    }
+    return user;
+  }
+}

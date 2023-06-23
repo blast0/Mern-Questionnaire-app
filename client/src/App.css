@@ -1,0 +1,46 @@
+.Home-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    45deg,
+    rgba(252, 165, 241, 1) 10%,
+    rgba(181, 255, 255, 1) 70%
+  );
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+input {
+  padding: 8px 10px;
+  margin: 10px;
+}
+input:focus {
+  outline: none;
+}
+.submit-btn {
+  background-color: aquamarine;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+}
+.submit-btn:hover {
+  cursor: pointer;
+  background-color: rgb(96, 230, 185);
+}
+.cancel-btn {
+  background-color: rgb(228, 114, 99);
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+}
+.cancel-btn:hover {
+  cursor: pointer;
+  background-color: rgb(235, 80, 60);
+}
+.date-input {
+  width: 175px;
+}

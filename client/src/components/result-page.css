@@ -1,0 +1,11 @@
+.Result-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    45deg,
+    rgba(252, 165, 241, 1) 10%,
+    rgba(181, 255, 255, 1) 70%
+  );
+}
