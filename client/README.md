@@ -1,11 +1,4 @@
-# Getting started nestjs server
-Goto directory: server
-run npm start:dev
-
 # Getting Started with Create React App
-
-Goto directory: client/src
-run npm start
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
