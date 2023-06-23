@@ -4,6 +4,9 @@
 Goto directory: server
 
 In the Terminal
+```npm i``` to install all the dependencies ```npm i force``` if that doesn't work
+
+To start the server
 
 ```npm run start:dev```
 
@@ -12,5 +15,7 @@ In the Terminal
 Goto directory: client/src
 
 In the Terminal
+```npm i``` to install all the dependencies ```npm i force``` if that doesn't work
+
 
 ```npm start```
