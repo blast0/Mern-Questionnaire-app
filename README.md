@@ -2,7 +2,8 @@
 
 # Getting started with nestjs server
 Goto directory: server
-run npm start:dev
+In the Terminal
+```npm run start:dev```
 
 # Getting Started with React App
 
