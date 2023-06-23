@@ -12,26 +12,23 @@ const FormPage = () => {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [dob, setDob] = useState('')
-  const [users, setUsers] = useState([])
-  const [isNewUSer, setIsNewUser]=useState(false)
+  const [isNewUSer, setIsNewUser] = useState(false)
 
   useEffect(() => {
     axios({
       method: 'get',
       url: `http://localhost:3002/users/${userName}`,
     }).then((res) => {
-      console.log(res)
-      setUsers(res.data)
-      setDob(res.data.dob)
+      setName(res.data.name)
       setEmail(res.data.email)
       setPhone(res.data.phone)
-      setName(res.data.name)
+      setDob(res.data.dob)
       setIsNewUser(false)
     })
-    .catch((error) => {
-      setIsNewUser(true)
-      console.error(error);
-    });
+      .catch((error) => {
+        setIsNewUser(true)
+        console.error(error);
+      });
   }, [userName])
 
 
@@ -43,12 +40,12 @@ const FormPage = () => {
         email: email,
         phone: phone,
         dob: dob
-      }).then( (response)=> {
+      }).then((response) => {
         console.log(response);
       })
-      .catch( (error)=> {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
     }
     else {
       axios.patch("http://localhost:3002/users/" + userName, {
@@ -57,28 +54,23 @@ const FormPage = () => {
         email: email,
         phone: phone,
         dob: dob
-      }).then( (response)=> {
+      }).then((response) => {
         console.log(response);
-       
+
       })
-      .catch( (error)=> {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
     }
     navigate(
       "/result",
       {
         state: {
-          username: userName,
-          name: name,
-          email: email,
-          phone: phone,
-          dob: dob,
-          mode: isNewUSer ? "created" : "updated" 
+          mode: isNewUSer ? "created" : "updated"
         }
       }
     )
-    
+
 
   }
 
@@ -94,7 +86,6 @@ const FormPage = () => {
   const handleDobChange = (e) => {
     setDob(e.target.value)
   }
-console.log(users, isNewUSer)
   return (
     <div className='Form-page'>
       <form onSubmit={(e) => {

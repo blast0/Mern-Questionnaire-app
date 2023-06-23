@@ -88,7 +88,6 @@ export class UsersService {
     } catch (error) {
       throw new NotFoundException('Could not find user by username');
     }
-    console.log(await this.userModel.find())
     if (!user) {
       throw new NotFoundException('Could not find user. not user');
     }
