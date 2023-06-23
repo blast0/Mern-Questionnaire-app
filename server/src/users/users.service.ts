@@ -34,8 +34,8 @@ export class UsersService {
     }));
   }
 
-  async getSingleUser(userId: string) {
-    const user = await this.findUser(userId);
+  async getSingleUser(username: string) {
+    const user = await this.findUser(username);
     return {
       id: user.id,
       username: user.username,
@@ -54,7 +54,7 @@ export class UsersService {
     phone: Number,
     dob: String,
   ) {
-    const updatedUser = await this.findUser(userId);
+    const updatedUser = await this.findUser(username);
     if(username){
       updatedUser.username=username;
     }
@@ -81,15 +81,16 @@ export class UsersService {
     }
   }
 
-  private async findUser(userName: string): Promise<User> {
+  private async findUser(userName: String): Promise<User> {
     let user;
     try {
-      user = await this.userModel.findOne({usename: userName});
+      user = await this.userModel.findOne({username: userName});
     } catch (error) {
-      throw new NotFoundException('Could not find user.');
+      throw new NotFoundException('Could not find user by username');
     }
+    console.log(await this.userModel.find())
     if (!user) {
-      throw new NotFoundException('Could not find user.');
+      throw new NotFoundException('Could not find user. not user');
     }
     return user;
   }

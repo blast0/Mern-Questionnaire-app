@@ -38,9 +38,9 @@ export class UsersController {
     return users;
   }
 
-  @Get(':id')
-  getUser(@Param('id') prodId: string) {
-    return this.usersService.getSingleUser(prodId);
+  @Get(':username')
+  getUser(@Param('username') username: string) {
+    return this.usersService.getSingleUser(username);
   }
 
   @Patch(':username')
